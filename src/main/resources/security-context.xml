@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <security:http use-expressions="true" auto-config="true">
+        <security:intercept-url pattern="/websocket" access="authenticated" />
+        <security:form-login default-target-url="/websocket" login-processing-url="/login" password-parameter="password" username-parameter="id" authentication-failure-url="/"
+                             login-page="/login"/>
+        <security:session-management>
+            <security:concurrency-control max-sessions="2" expired-url="/sessionFiled"/>
+        </security:session-management>
+        <security:logout logout-url="/logout"/>
+    </security:http>
+
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:user-service>
+                <security:user name="bangae1" authorities="ROLE_USER" password="fpdlwms1"/>
+                <security:user name="apple6268" authorities="ROLE_USER" password="gkdlehs"/>
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+</beans>
